@@ -1,1 +1,16 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=8040116&assignment_repo_type=AssignmentRepo)
+# Today
+## A minimalist to-do app
+
+This is a very simple to-do app for demonstration / learning purposes.
+
+## Development
+### Requirements
+* Node
+* Yarn
+
+### Dev
+To run the project locally:
+1. Clone the project
+1. Install dependencies with `yarn`
+1. Start the local server with `yarn dev`
+
