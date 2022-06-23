@@ -1,12 +1,14 @@
+import { TodoContext } from '../context'
 import { Todo } from '../types'
+import { useContext } from 'react'
 
-type props = { todos: Todo[] | null }
+const TodoList = () => {
+  const { todos } = useContext(TodoContext)
 
-const TodoList = ({ todos }: props) => {
   if (!todos) return <p>Congrats! You're done for today.</p>
 
   const todoItems = todos?.map((todo: Todo) => {
-    return <li>{todo.todo}</li>
+    return <li key={todo.id}>{todo.todo}</li>
   })
 
   return todoItems && <ul>{todoItems}</ul>

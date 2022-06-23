@@ -6,11 +6,7 @@ export const TodoReducer = (state: Todo[], action: TodoAction) => {
   switch (action.type) {
     case 'CREATE':
       newState.unshift({ id: uuid(), todo: action.todo, completed: false })
-      return newState.unshift({
-        id: uuid(),
-        todo: action.todo,
-        completed: false,
-      })
+      return newState
     case 'UPDATE': {
       const index = newState.findIndex((todo) => todo.id === action.id)
       newState[index] = { ...newState[index], todo: action.todo }

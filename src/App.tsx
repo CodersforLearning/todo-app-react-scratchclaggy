@@ -1,5 +1,6 @@
 import TodoCreator from './components/TodoCreator'
 import TodoList from './components/TodoList'
+import TodoProvider from './context'
 import { Todo } from './types'
 
 const todos: Todo[] | null = [
@@ -9,12 +10,12 @@ const todos: Todo[] | null = [
 
 function App() {
   return (
-    <>
+    <TodoProvider>
       <h1>Today</h1>
       <h2>Minimalist Todo</h2>
       <TodoCreator />
-      <TodoList todos={todos} />
-    </>
+      <TodoList />
+    </TodoProvider>
   )
 }
 

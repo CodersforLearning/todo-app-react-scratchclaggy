@@ -1,3 +1,5 @@
+import { TodoContext } from '../context'
+import { useContext } from 'react'
 import { useForm, SubmitHandler, useWatch } from 'react-hook-form'
 
 type Inputs = {
@@ -5,8 +7,12 @@ type Inputs = {
 }
 
 const TodoCreator = () => {
-  const { handleSubmit, register } = useForm<Inputs>()
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+  const { dispatchTodos } = useContext(TodoContext)
+  const { handleSubmit, register, reset } = useForm<Inputs>()
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    dispatchTodos({ type: 'CREATE', todo: data.todo })
+    reset()
+  }
 
   return (
     <form className="bg-slate-500" onSubmit={handleSubmit(onSubmit)}>
