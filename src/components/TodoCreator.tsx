@@ -1,4 +1,5 @@
 import { TodoContext } from '../context'
+import { PlusIcon } from '@heroicons/react/solid'
 import { useContext } from 'react'
 import { useForm, SubmitHandler, useWatch } from 'react-hook-form'
 
@@ -15,16 +16,24 @@ const TodoCreator = () => {
   }
 
   return (
-    <form className="bg-slate-500" onSubmit={handleSubmit(onSubmit)}>
-      <input
-        className="p-4 bg-slate-400"
-        {...register('todo', {
-          required: true,
-          maxLength: 128,
-        })}
-      />
-      <input type="submit" />
-    </form>
+    <div className="rounded-md bg-gray-600 m-8 px-16 py-8">
+      <h3 className="py-2">Something you need to do?</h3>
+      <form className="flex space-x-2" onSubmit={handleSubmit(onSubmit)}>
+        <input
+          className="flex-grow text-gray-700 inline-block p-4 rounded-md bg-gray-400"
+          {...register('todo', {
+            required: true,
+            maxLength: 128,
+          })}
+        />
+        <button
+          className="p-4 px-6 bg-emerald-700 rounded-lg w-fit"
+          type="submit"
+        >
+          <PlusIcon className="h-5 w-5" />
+        </button>
+      </form>
+    </div>
   )
 }
 
