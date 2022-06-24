@@ -10,13 +10,13 @@ export const TodoReducer = (state: Todo[], action: TodoAction) => {
       newState.unshift({ id: uuid(), todo: action.todo, completed: false })
       break
     case 'UPDATE': {
-      let todo = newState.find((todo) => todo.id === action.id)
-      if (todo) todo = { ...todo, todo: action.todo }
+      const index = newState.findIndex((todo) => todo.id === action.id)
+      newState[index].todo = action.todo
       break
     }
     case 'SET_COMPLETED': {
-      let todo = newState.find((todo) => todo.id === action.id)
-      if (todo) todo = { ...todo, completed: action.completed }
+      const index = newState.findIndex((todo) => todo.id === action.id)
+      newState[index].completed = action.completed
       break
     }
     case 'DELETE':
