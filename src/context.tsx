@@ -1,6 +1,6 @@
 import { TodoReducer } from './reducer'
 import { Todo, TodoAction } from './types'
-import { createContext, Reducer, useReducer } from 'react'
+import { createContext, Reducer, useEffect, useReducer, useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
 export const TodoContext = createContext<{
@@ -9,13 +9,14 @@ export const TodoContext = createContext<{
 }>({ todos: [], dispatchTodos: () => {} })
 
 const TodoProvider = ({ children }: { children: React.ReactNode }) => {
+  const initState: Todo[] = JSON.parse(
+    localStorage.getItem('Today-Storage') || '[]'
+  )
   const [state, dispatch] = useReducer<Reducer<Todo[], TodoAction>>(
     TodoReducer,
-    [
-      { id: uuid(), todo: 'Finish this app', completed: false },
-      { id: uuid(), todo: 'Setup the repo', completed: true },
-    ]
+    initState
   )
+
   return (
     <TodoContext.Provider
       value={{

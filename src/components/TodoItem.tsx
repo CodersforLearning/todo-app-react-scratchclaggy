@@ -15,7 +15,7 @@ const TodoItem = (todo: Todo) => {
   }
 
   return (
-    <li key={todo.id}>
+    <li>
       <span className="my-2 flex space-x-2 align-middle">
         <span
           className={`flex-grow ${

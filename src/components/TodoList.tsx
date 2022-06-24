@@ -7,10 +7,16 @@ const TodoList = () => {
   const { todos } = useContext(TodoContext)
 
   // Default message
-  if (!todos) return <p>Congrats! You're done for today.</p>
+  if (!todos.length)
+    return (
+      <p className="my-2 text-gray-500">Congrats! You're done for today.</p>
+    )
 
-  const todoItems = todos?.map((todo: Todo) => {
-    return <TodoItem {...todo} />
+  const incomplete = todos?.filter((todo) => !todo.completed)
+  const completed = todos?.filter((todo) => todo.completed)
+
+  const todoItems = [...incomplete, ...completed].map((todo: Todo) => {
+    return <TodoItem key={todo.id} {...todo} />
   })
 
   return todoItems && <ul>{todoItems}</ul>
