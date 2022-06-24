@@ -1,7 +1,7 @@
 import { TodoContext } from '../context'
 import { PlusIcon } from '@heroicons/react/solid'
 import { useContext } from 'react'
-import { useForm, SubmitHandler, useWatch } from 'react-hook-form'
+import { useForm, SubmitHandler } from 'react-hook-form'
 
 type Inputs = {
   todo: string
@@ -16,11 +16,11 @@ const TodoCreator = () => {
   }
 
   return (
-    <div className="m-8 rounded-md bg-gray-600 px-16 py-8">
+    <>
       <h3 className="py-2">Something you need to do?</h3>
       <form className="flex space-x-2" onSubmit={handleSubmit(onSubmit)}>
         <input
-          className="inline-block flex-grow rounded-md bg-gray-400 p-4 text-gray-700"
+          className="inline-block flex-grow rounded-md bg-gray-400 p-4 text-xl text-gray-700"
           {...register('todo', {
             required: true,
             maxLength: 128,
@@ -33,7 +33,7 @@ const TodoCreator = () => {
           <PlusIcon className="h-5 w-5" />
         </button>
       </form>
-    </div>
+    </>
   )
 }
 
