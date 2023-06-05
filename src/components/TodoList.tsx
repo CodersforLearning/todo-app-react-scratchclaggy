@@ -18,7 +18,13 @@ const TodoList = () => {
     return <TodoItem key={todo.id} {...todo} />
   })
 
-  return todoItems && <ul>{todoItems}</ul>
+  return (
+    todoItems && (
+      <ul className="scrollbar flex flex-col gap-y-2 overflow-y-auto">
+        {todoItems}
+      </ul>
+    )
+  )
 }
 
 export default TodoList

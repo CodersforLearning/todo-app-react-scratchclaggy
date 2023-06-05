@@ -1,4 +1,5 @@
 import { PlusIcon } from '@heroicons/react/solid'
+import { ErrorMessage } from '@hookform/error-message'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useTodoStore } from '../store'
 
@@ -8,31 +9,43 @@ type Inputs = {
 
 const TodoCreator = () => {
   const create = useTodoStore((state) => state.create)
-  const { handleSubmit, register, reset } = useForm<Inputs>()
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+    reset,
+  } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = ({ todo }) => {
     create(todo)
     reset()
   }
 
   return (
-    <>
-      <h3 className="py-2">Something you need to do?</h3>
-      <form className="flex space-x-2" onSubmit={handleSubmit(onSubmit)}>
+    <div className="mb-2 space-y-2">
+      <h3>Something you need to do?</h3>
+      <form className="flex gap-x-2" onSubmit={handleSubmit(onSubmit)}>
         <input
-          className="inline-block flex-grow rounded-md bg-gray-400 p-4 text-xl text-gray-700"
+          className="form-input flex-grow rounded-md border border-gray-300 bg-gray-800 p-4 text-xl focus:border-gray-300 focus:outline-emerald-700 focus:ring-0"
           {...register('todo', {
             required: true,
-            maxLength: 128,
+            maxLength: { value: 128, message: 'Max length 128 characters' },
           })}
         />
         <button
-          className="w-fit rounded-lg bg-emerald-700 p-4 px-6"
+          className="rounded-lg bg-emerald-700 p-4 px-6 hover:bg-emerald-600 active:outline-emerald-700"
           type="submit"
         >
           <PlusIcon className="h-5 w-5" />
         </button>
       </form>
-    </>
+      <ErrorMessage
+        name="todo"
+        errors={errors}
+        render={({ message }) => (
+          <span className="fixed -mt-1 text-sm text-red-800">{message}</span>
+        )}
+      />
+    </div>
   )
 }
 

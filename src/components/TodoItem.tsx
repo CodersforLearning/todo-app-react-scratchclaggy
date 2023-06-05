@@ -16,21 +16,26 @@ const TodoItem = (todo: Todo) => {
 
   return (
     <li>
-      <span className="my-2 flex space-x-2 align-middle">
-        <span
-          className={`flex-grow ${
-            todo.completed && 'text-gray-500 line-through'
+      <span className="flex flex-nowrap items-center space-x-2">
+        <div
+          className={`flex-grow truncate  ${
+            todo.completed ? 'text-gray-500 line-through' : 'text-gray-200'
           }`}
-        >{`${todo.todo}`}</span>
+        >
+          {todo.todo}
+        </div>
         {todo.completed || (
           <button
             onClick={handleComplete}
-            className="rounded-lg bg-emerald-900 p-2"
+            className="rounded-lg bg-emerald-900 p-2 hover:bg-emerald-800"
           >
             <CheckIcon className="h-5 w-5" />
           </button>
         )}
-        <button onClick={handleDelete} className="rounded-lg bg-red-900 p-2">
+        <button
+          onClick={handleDelete}
+          className="rounded-lg bg-red-900 p-2 hover:bg-red-800"
+        >
           <TrashIcon className="h-5 w-5" />
         </button>
       </span>

@@ -3,18 +3,17 @@ import { useTodoStore } from '../store'
 export const Header = () => {
   const todos = useTodoStore((state) => state.todos)
   const todoCount = todos.length
-  const unfinishedCount = todos.filter((todo) => !todo.completed).length
-  const isSomethingTodo = unfinishedCount > 0
+  const unfinishedCount = todos.filter((todo) => todo.completed).length
 
   return (
-    <span className="m-10 flex flex-row items-baseline space-x-2">
-      <h1 className="text-7xl">Today</h1>
-      <h2 className="grow text-2xl">Minimalist Todo</h2>
-      {isSomethingTodo ? (
-        <span>{` ( ${unfinishedCount} / ${todoCount} )`}</span>
-      ) : (
-        <span>{`( ${todoCount} )`}</span>
-      )}
-    </span>
+    <div className="flex flex-col gap-y-1">
+      <h1 className="text-3xl">Today</h1>
+      <div className="flex items-baseline justify-between text-lg text-gray-300">
+        <h2>Minimalist Todo</h2>
+        {Boolean(todoCount) && (
+          <span>{` ( ${unfinishedCount} / ${todoCount} )`}</span>
+        )}
+      </div>
+    </div>
   )
 }
