@@ -1,10 +1,9 @@
-import { TodoContext } from '../context'
+import { useTodoStore } from '../store'
 import { Todo } from '../types'
-import { useContext } from 'react'
 import TodoItem from './TodoItem'
 
 const TodoList = () => {
-  const { todos } = useContext(TodoContext)
+  const todos = useTodoStore((state) => state.todos)
 
   // Default message
   if (!todos.length)

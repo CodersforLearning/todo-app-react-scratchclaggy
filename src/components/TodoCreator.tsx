@@ -1,17 +1,16 @@
-import { TodoContext } from '../context'
 import { PlusIcon } from '@heroicons/react/solid'
-import { useContext } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { useTodoStore } from '../store'
 
 type Inputs = {
   todo: string
 }
 
 const TodoCreator = () => {
-  const { dispatchTodos } = useContext(TodoContext)
+  const create = useTodoStore((state) => state.create)
   const { handleSubmit, register, reset } = useForm<Inputs>()
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    dispatchTodos({ type: 'CREATE', todo: data.todo })
+  const onSubmit: SubmitHandler<Inputs> = ({ todo }) => {
+    create(todo)
     reset()
   }
 

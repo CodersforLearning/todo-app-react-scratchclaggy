@@ -1,17 +1,17 @@
-import { TodoContext } from '../context'
-import { useContext } from 'react'
-import { TrashIcon, CheckIcon } from '@heroicons/react/solid'
+import { CheckIcon, TrashIcon } from '@heroicons/react/solid'
+import { useTodoStore } from '../store'
 import { Todo } from '../types'
 
 const TodoItem = (todo: Todo) => {
-  const { dispatchTodos } = useContext(TodoContext)
+  const markComplete = useTodoStore((state) => state.markComplete)
+  const deleteTodo = useTodoStore((state) => state.delete)
 
   const handleComplete = () => {
-    dispatchTodos({ type: 'SET_COMPLETED', id: todo.id, completed: true })
+    markComplete(todo.id)
   }
 
   const handleDelete = () => {
-    dispatchTodos({ type: 'DELETE', id: todo.id })
+    deleteTodo(todo.id)
   }
 
   return (
