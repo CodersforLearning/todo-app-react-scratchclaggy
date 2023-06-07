@@ -1,12 +1,11 @@
-import { useAuthSession } from '../hooks'
-import { useTodoStore } from '../store'
+import { useFetchTodos } from '../hooks'
 import { supabase } from '../supabase'
 
 export const Header = () => {
-  const todos = useTodoStore((state) => state.todos)
-  const todoCount = todos.length
-  const unfinishedCount = todos.filter((todo) => todo.completed).length
-  const session = useAuthSession()
+  const todos = useFetchTodos()
+  console.log(todos)
+  const todoCount = todos?.length ?? 0
+  const unfinishedCount = todos?.filter((todo) => todo.completed).length ?? 0
 
   return (
     <div className="flex flex-col gap-y-1">

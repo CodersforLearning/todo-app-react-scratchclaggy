@@ -30,7 +30,7 @@ export const useFetchTodos = () => {
     supabase
       .from('todos')
       .select()
-      .then((data) => setTodos((data as unknown as Todo[]) ?? undefined))
+      .then(({ data }) => setTodos((data as Todo[]) ?? undefined))
   }, [])
 
   return todos

@@ -1,23 +1,25 @@
 import { PlusIcon } from '@heroicons/react/24/solid'
 import { ErrorMessage } from '@hookform/error-message'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useTodoStore } from '../store'
+import { supabase } from '../supabase'
 
 type Inputs = {
   todo: string
 }
 
 const TodoCreator = () => {
-  const create = useTodoStore((state) => state.create)
   const {
     formState: { errors },
     handleSubmit,
     register,
     reset,
   } = useForm<Inputs>()
+
   const onSubmit: SubmitHandler<Inputs> = ({ todo }) => {
-    create(todo)
-    reset()
+    supabase
+      .from('todos')
+      .insert({ todo: todo })
+      .then(() => reset())
   }
 
   return (

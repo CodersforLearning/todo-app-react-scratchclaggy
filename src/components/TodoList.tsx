@@ -1,12 +1,12 @@
-import { useTodoStore } from '../store'
 import { Todo } from '../types'
 import TodoItem from './TodoItem'
+import { useFetchTodos } from '../hooks'
 
 const TodoList = () => {
-  const todos = useTodoStore((state) => state.todos)
+  const todos = useFetchTodos()
 
   // Default message
-  if (!todos.length)
+  if (!todos?.length)
     return (
       <p className="my-2 text-gray-500">Congrats! You're done for today.</p>
     )

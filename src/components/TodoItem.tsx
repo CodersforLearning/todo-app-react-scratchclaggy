@@ -1,17 +1,14 @@
 import { CheckIcon, TrashIcon } from '@heroicons/react/24/solid'
-import { useTodoStore } from '../store'
+import { supabase } from '../supabase'
 import { Todo } from '../types'
 
 const TodoItem = (todo: Todo) => {
-  const markComplete = useTodoStore((state) => state.markComplete)
-  const deleteTodo = useTodoStore((state) => state.delete)
-
-  const handleComplete = () => {
-    markComplete(todo.id)
+  const handleComplete = async () => {
+    await supabase.from('todos').update({ completed: true }).eq('id', todo.id)
   }
 
-  const handleDelete = () => {
-    deleteTodo(todo.id)
+  const handleDelete = async () => {
+    await supabase.from('todos').delete().eq('id', todo.id)
   }
 
   return (
