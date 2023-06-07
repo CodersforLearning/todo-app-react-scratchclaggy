@@ -27,14 +27,14 @@ const TodoItem = (todo: Todo) => {
         {todo.completed || (
           <button
             onClick={handleComplete}
-            className="rounded-lg bg-emerald-900 p-2 hover:bg-emerald-800"
+            className="rounded-lg bg-emerald-900 p-2 transition-transform ease-out hover:scale-105 hover:bg-emerald-800"
           >
             <CheckIcon className="h-5 w-5" />
           </button>
         )}
         <button
           onClick={handleDelete}
-          className="rounded-lg bg-red-900 p-2 hover:bg-red-800"
+          className="rounded-lg bg-red-900 p-2 transition-transform ease-out hover:scale-105 hover:bg-red-800"
         >
           <TrashIcon className="h-5 w-5" />
         </button>

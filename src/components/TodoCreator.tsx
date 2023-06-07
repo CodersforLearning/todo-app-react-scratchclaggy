@@ -32,7 +32,7 @@ const TodoCreator = () => {
           })}
         />
         <button
-          className="rounded-lg bg-emerald-700 p-4 px-6 hover:bg-emerald-600 active:outline-emerald-700"
+          className="rounded-lg bg-emerald-700 p-4 px-6 transition-transform ease-out hover:scale-105 hover:bg-emerald-600 active:outline-emerald-700"
           type="submit"
         >
           <PlusIcon className="h-5 w-5" />

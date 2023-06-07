@@ -1,5 +1,4 @@
 import { Auth } from '@supabase/auth-ui-react'
-import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { Header } from './components/Header'
 import TodoCreator from './components/TodoCreator'
 import TodoList from './components/TodoList'
@@ -17,7 +16,13 @@ function App() {
           <TodoList />
         </div>
       ) : (
-        <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
+        <div className="flex h-screen items-center">
+          <Auth
+            supabaseClient={supabase}
+            providers={['github']}
+            onlyThirdPartyProviders
+          />
+        </div>
       )}
     </div>
   )
