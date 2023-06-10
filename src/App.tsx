@@ -1,12 +1,20 @@
 import { Auth } from '@supabase/auth-ui-react'
+import { useEffect } from 'react'
 import { Header } from './components/Header'
 import TodoCreator from './components/TodoCreator'
 import TodoList from './components/TodoList'
 import { useAuthSession } from './hooks'
+import { useTodoStore } from './store'
 import { supabase } from './supabase'
 
 function App() {
   const session = useAuthSession()
+  const fetchTodos = useTodoStore((state) => state.fetch)
+
+  useEffect(() => {
+    fetchTodos()
+  }, [])
+
   return (
     <div className="flex h-screen w-screen justify-center overflow-hidden bg-gray-900 text-gray-100">
       {session ? (

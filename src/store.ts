@@ -1,34 +1,34 @@
-import { v4 as uuid } from 'uuid'
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { createTodo, deleteTodo, fetchTodos, markCompleted } from './supabase'
 import { Todo } from './types'
 
 interface Store {
   todos: Todo[]
-  create: (todo: string) => void
-  markComplete: (id: string) => void
-  delete: (id: string) => void
+  fetch: () => Promise<void>
+  create: (todo: string) => Promise<void>
+  markCompleted: (id: string) => Promise<void>
+  delete: (id: string) => Promise<void>
 }
 
-export const useTodoStore = create(
-  persist<Store>(
-    (set, get) => ({
-      todos: [],
-      create: (todo) =>
-        set({
-          todos: [{ id: uuid(), todo, completed: false }].concat(get().todos),
-        }),
-      markComplete: (id) =>
-        set({
-          todos: get().todos.map((todo) =>
-            todo.id === id ? { ...todo, completed: true } : todo
-          ),
-        }),
-      delete: (id) =>
-        set({
-          todos: get().todos.filter((todo) => todo.id !== id),
-        }),
-    }),
-    { name: 'todo-store' }
-  )
-)
+export const useTodoStore = create<Store>((set) => ({
+  todos: [],
+  fetch: async () => {
+    const todos = await fetchTodos()
+    set({ todos })
+  },
+  create: async (todo: string) => {
+    await createTodo(todo)
+    const todos = await fetchTodos()
+    set({ todos })
+  },
+  markCompleted: async (id) => {
+    await markCompleted(id)
+    const todos = await fetchTodos()
+    set({ todos })
+  },
+  delete: async (id) => {
+    await deleteTodo(id)
+    const todos = await fetchTodos()
+    set({ todos })
+  },
+}))

@@ -1,9 +1,9 @@
 import { Todo } from '../types'
 import TodoItem from './TodoItem'
-import { useFetchTodos } from '../hooks'
+import { useTodoStore } from '../store'
 
 const TodoList = () => {
-  const todos = useFetchTodos()
+  const todos = useTodoStore((state) => state.todos)
 
   // Default message
   if (!todos?.length)
