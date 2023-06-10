@@ -1,4 +1,4 @@
-import { PlusIcon } from '@heroicons/react/24/solid'
+import { ArrowPathIcon, PlusIcon } from '@heroicons/react/24/solid'
 import { ErrorMessage } from '@hookform/error-message'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useCreateTodo } from '../hooks'
@@ -36,7 +36,7 @@ const TodoCreator = () => {
           type="submit"
         >
           {isLoading ? (
-            <RefreshIcon className="h-5 w-5 animate-spin" />
+            <ArrowPathIcon className="h-5 w-5 animate-spin" />
           ) : (
             <PlusIcon className="h-5 w-5" />
           )}

@@ -1,4 +1,4 @@
-import { CheckIcon, TrashIcon, ArrowPathIcon } from '@heroicons/react/24/solid'
+import { ArrowPathIcon, CheckIcon, TrashIcon } from '@heroicons/react/24/solid'
 import { useDeleteTodo, useMarkComplete } from '../hooks'
 import { Todo } from '../types'
 
