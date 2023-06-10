@@ -1,15 +1,12 @@
-import { CheckIcon, TrashIcon } from '@heroicons/react/24/solid'
-import { supabase } from '../supabase'
+import { CheckIcon, TrashIcon, ArrowPathIcon } from '@heroicons/react/24/solid'
+import { useDeleteTodo, useMarkComplete } from '../hooks'
 import { Todo } from '../types'
 
 const TodoItem = (todo: Todo) => {
-  const handleComplete = async () => {
-    await supabase.from('todos').update({ completed: true }).eq('id', todo.id)
-  }
-
-  const handleDelete = async () => {
-    await supabase.from('todos').delete().eq('id', todo.id)
-  }
+  const { mutate: markComplete, isLoading: isLoadingMarkComplete } =
+    useMarkComplete()
+  const { mutate: deleteTodo, isLoading: isLoadingDelete } = useDeleteTodo()
+  const isLoading = isLoadingMarkComplete || isLoadingDelete
 
   return (
     <li>
@@ -23,17 +20,27 @@ const TodoItem = (todo: Todo) => {
         </div>
         {todo.completed || (
           <button
-            onClick={handleComplete}
             className="rounded-lg bg-emerald-900 p-2 transition-transform ease-out hover:scale-105 hover:bg-emerald-800"
+            disabled={isLoading}
+            onClick={() => markComplete(todo.id)}
           >
-            <CheckIcon className="h-5 w-5" />
+            {isLoadingMarkComplete ? (
+              <ArrowPathIcon className="h-5 w-5 animate-spin" />
+            ) : (
+              <CheckIcon className="h-5 w-5" />
+            )}
           </button>
         )}
         <button
-          onClick={handleDelete}
           className="rounded-lg bg-red-900 p-2 transition-transform ease-out hover:scale-105 hover:bg-red-800"
+          disabled={isLoading}
+          onClick={() => deleteTodo(todo.id)}
         >
-          <TrashIcon className="h-5 w-5" />
+          {isLoadingDelete ? (
+            <ArrowPathIcon className="h-5 w-5 animate-spin" />
+          ) : (
+            <TrashIcon className="h-5 w-5" />
+          )}
         </button>
       </span>
     </li>

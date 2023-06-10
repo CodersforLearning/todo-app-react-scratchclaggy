@@ -2,8 +2,7 @@ import { useFetchTodos } from '../hooks'
 import { supabase } from '../supabase'
 
 export const Header = () => {
-  const todos = useFetchTodos()
-  console.log(todos)
+  const { data: todos } = useFetchTodos()
   const todoCount = todos?.length ?? 0
   const unfinishedCount = todos?.filter((todo) => todo.completed).length ?? 0
 

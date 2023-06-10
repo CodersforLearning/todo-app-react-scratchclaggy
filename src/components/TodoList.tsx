@@ -3,9 +3,10 @@ import TodoItem from './TodoItem'
 import { useFetchTodos } from '../hooks'
 
 const TodoList = () => {
-  const todos = useFetchTodos()
+  const { data: todos, isLoading } = useFetchTodos()
 
-  // Default message
+  if (isLoading) return <p className="my-2 text-gray-500">Loading...</p>
+
   if (!todos?.length)
     return (
       <p className="my-2 text-gray-500">Congrats! You're done for today.</p>
@@ -14,9 +15,9 @@ const TodoList = () => {
   const incomplete = todos?.filter((todo) => !todo.completed)
   const completed = todos?.filter((todo) => todo.completed)
 
-  const todoItems = [...incomplete, ...completed].map((todo: Todo) => {
-    return <TodoItem key={todo.id} {...todo} />
-  })
+  const todoItems = [...incomplete, ...completed].map((todo: Todo) => (
+    <TodoItem key={todo.id} {...todo} />
+  ))
 
   return (
     todoItems && (
