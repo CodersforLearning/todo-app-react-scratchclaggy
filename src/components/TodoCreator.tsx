@@ -1,4 +1,4 @@
-import { PlusIcon } from '@heroicons/react/solid'
+import { PlusIcon } from '@heroicons/react/24/solid'
 import { ErrorMessage } from '@hookform/error-message'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useTodoStore } from '../store'

@@ -1,4 +1,4 @@
-import { CheckIcon, TrashIcon } from '@heroicons/react/solid'
+import { CheckIcon, TrashIcon } from '@heroicons/react/24/solid'
 import { useTodoStore } from '../store'
 import { Todo } from '../types'
 
