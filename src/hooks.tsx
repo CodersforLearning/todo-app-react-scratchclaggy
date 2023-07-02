@@ -1,16 +1,30 @@
-import { Session } from '@supabase/supabase-js'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { supabase } from './supabase'
 import { Todo } from './types'
 
 export const useAuthSession = () => {
+  const queryClient = useQueryClient()
+
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      queryClient.setQueryData(['authSession'], session)
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
+
   return useQuery(['authSession'], async () => {
-    const { data, error } = await supabase.auth.getSession()
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.getSession()
 
     if (error) throw error
 
-    return data
+    return session
   })
 }
 
