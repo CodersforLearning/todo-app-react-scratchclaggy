@@ -20,7 +20,11 @@ export const Header = () => {
         </button>
       </div>
       <div className="flex items-baseline justify-between text-lg text-gray-300">
-        <h2>Minimalist Todo</h2>
+        <div className="flex gap-x-2">
+          <h2>Minimalist Todo</h2>
+          <span>-</span>
+          <span>Basic Data Fetching</span>
+        </div>
         {Boolean(todoCount) && (
           <span>{` ( ${unfinishedCount} / ${todoCount} )`}</span>
         )}
